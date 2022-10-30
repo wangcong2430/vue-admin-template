@@ -36,6 +36,13 @@ export const constantRoutes = [
     component: () => import('@/views/login/index'),
     hidden: true
   },
+  {
+    path: '/apply',
+    name: 'apply',
+    component: () => import('@/views/apply/index'),
+    meta: { title: '注册', icon: 'apply' }    
+  },
+  
 
   {
     path: '/404',
@@ -51,11 +58,14 @@ export const constantRoutes = [
       path: 'dashboard',
       name: 'Dashboard',
       component: () => import('@/views/dashboard/index'),
-      meta: { title: 'Dashboard', icon: 'dashboard' }
-    }]
+      meta: { title: '楼面', icon: 'floor' }
+    },
+   
+  ]
   },
+  
 
-  {
+  /*{
     path: '/example',
     component: Layout,
     redirect: '/example/table',
@@ -75,7 +85,88 @@ export const constantRoutes = [
         meta: { title: 'Tree', icon: 'tree' }
       }
     ]
+  },*/
+  //台桌管理
+  {
+    path: '/example',
+    component: Layout,
+    redirect: '/example/list',
+    name: 'Example',
+    meta: { title: '台桌管理', icon: 'el-icon-s-help' },
+    children: [
+      {
+        path: 'list',
+        name: 'list',
+        component: () => import('@/views/table/List'),
+        meta: { title: '台桌列表', icon: 'table' }
+      },
+
+      {
+        path: 'add',
+        name: 'add',
+        component: () => import('@/views/tree/Add'),
+        meta: { title: '增加台桌', icon: 'table2' }
+      }
+    ]
   },
+
+  //菜品分类管理
+  {
+    path: '/type',
+    component: Layout,   
+    name: 'Type',
+    meta: { title: '菜品分类管理', icon: 'serie' },
+    children: [
+      {
+        path: 'list',
+        name: 'List',
+        component: () => import('@/views/type/List'),
+        meta: { title: '菜品分类列表', icon: 'serie' }
+      },
+      {
+        path: 'add',
+        name: 'Add',
+        component: () => import('@/views/type/Add'),
+        meta: { title: '增加菜品类别', icon: 'serie' }
+      }
+    ]
+  },
+
+    //菜品管理
+    {
+      path: '/dish',
+      component: Layout,   
+      name: 'Dish',
+      meta: { title: '菜品管理', icon: 'dish' },
+      children: [
+        {
+          path: 'list',
+          name: 'List2',
+          component: () => import('@/views/dish/List'),
+          meta: { title: '菜品列表', icon: 'dish' }
+        },
+        {
+          path: 'add',
+          name: 'Add2',
+          component: () => import('@/views/dish/Add'),
+          meta: { title: '增加菜品', icon: 'dish' }
+        }
+      ]
+    },
+    {
+      path: '/set',
+      component: Layout,          
+      children: [{
+        path: 'set',
+        name: 'Set',
+        component: () => import('@/views/set/set'),
+        meta: { title: '系统设置', icon: 'set' }
+      },
+     
+    ]
+    },
+    
+  
 
   {
     path: '/form',
@@ -177,5 +268,9 @@ export function resetRouter() {
   const newRouter = createRouter()
   router.matcher = newRouter.matcher // reset router
 }
-
+router.beforeEach((to, from, next) => {
+  console.log('??~ to:', to);
+  console.log('??~ from:', from);
+  next();
+  })
 export default router

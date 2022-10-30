@@ -1,3 +1,4 @@
+//mock  模拟数据
 const Mock = require('mockjs')
 const { param2Obj } = require('./utils')
 
